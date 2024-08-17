@@ -72,7 +72,7 @@ void guess() {
 
         //Display for initialized placeholder and guesses
         cout << "Word: " << wordGuessed << endl; // Initialized placeholder
-        cout << "Guesses You Have Left: " << guessesAllowed << endl; // Guesses
+        cout << "Guesses Left: " << guessesAllowed << endl; // Guesses
 
         //Prompt for user to guess
         cout << "Guesses(input letter): ";
