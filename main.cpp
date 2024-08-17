@@ -34,9 +34,8 @@ int main() {
 
 
                                 //++++++Game Setup+++++++
+            // Fix loop to end after winning **DONE**
             //*****Make the animations come in play++++++++
-            // Fix double word cathcer
-            // Fix loop to end after winning
 
 
 // Function for the random words
@@ -70,6 +69,7 @@ void guess() {
     // Game loop word checking logic
     while(incorrectGuesses != guessesAllowed){
 
+
         //Display for initialized placeholder and guesses
         cout << "Word: " << wordGuessed << endl; // Initialized placeholder
         cout << "Guesses You Have Left: " << guessesAllowed << endl; // Guesses
@@ -95,7 +95,8 @@ void guess() {
         }
 
         if (wordGuessed == chosenWord) {
-            cout << "You have won!";
+            cout << "You have won!" << endl;
+            return;
         }
     }
 
