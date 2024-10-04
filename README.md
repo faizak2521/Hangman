@@ -104,3 +104,7 @@ std::string wordGuessed(chosenWord.length(), '_');
     cout << "You lost the answer was " << chosenWord << endl;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
