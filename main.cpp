@@ -14,19 +14,21 @@ using namespace std;
 
 std::string wordList();
 void guess();
+void hangmanDisplay(int);
 
 int main() {
 
     cout << "Welcome to HANGMAN!" << endl << endl;
-    cout <<"|---------| " << endl <<
-           "|         |" << endl <<
-           "| " << endl <<
-           "| "<< endl <<
-           "| "<< endl <<
-           "| "<< endl <<
-           "^^^^^^^^^^^^"<< endl;
+//    cout <<"|---------| " << endl <<
+//           "|         |" << endl <<
+//           "| " << endl <<
+//           "| "<< endl <<
+//           "| "<< endl <<
+//           "| "<< endl <<
+//           "^^^^^^^^^^^^"<< endl;
 
     //call random words list
+    hangmanDisplay(0);
     wordList();
     guess();
     return 0;
@@ -36,6 +38,88 @@ int main() {
                                 //++++++Game Setup+++++++
             // Fix loop to end after winning **DONE**
             //*****Make the animations come in play++++++++
+
+//Function for making hangman
+void hangmanDisplay(int incorrectGuesses) {
+
+    switch (incorrectGuesses) {
+        case 0:
+            cout <<"|---------| " << endl <<
+                   "|         |" << endl <<
+                   "| " << endl <<
+                   "| " << endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "^^^^^^^^^^^^"<< endl;
+            break; // Add break to avoid fall-through
+        case 1:
+            cout <<"|---------| " << endl <<
+                   "|         |" << endl <<
+                   "|         0" << endl <<
+                   "| " << endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "^^^^^^^^^^^^"<< endl;
+            break;
+
+        case 2:
+            cout <<"|---------| " << endl <<
+                   "|         |" << endl <<
+                   "|         0" << endl <<
+                   "|         |" << endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "^^^^^^^^^^^^"<< endl;
+            break;
+
+        case 3:
+            cout <<"|---------| " << endl <<
+                   "|         |" << endl <<
+                   "|         0" << endl <<
+                   "|         |" << endl <<
+                   "|        /" << endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "^^^^^^^^^^^^"<< endl;
+            break;
+
+        case 4:
+            cout <<"|---------| " << endl <<
+                   "|         |" << endl <<
+                   "|         0" << endl <<
+                   "|         |" << endl <<
+                   "|        / \\" << endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "^^^^^^^^^^^^"<< endl;
+            break;
+
+        case 5:
+            cout <<"|---------| " << endl <<
+                   "|         |" << endl <<
+                   "|         0" << endl <<
+                   "|         |\\" << endl <<
+                   "|        / \\" << endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "^^^^^^^^^^^^"<< endl;
+            break;
+
+        case 6:
+            cout <<"|---------| " << endl <<
+                   "|         |" << endl <<
+                   "|         0" << endl <<
+                   "|        /|\\" << endl <<
+                   "|        / \\" << endl <<
+                   "| "<< endl <<
+                   "| "<< endl <<
+                   "^^^^^^^^^^^^"<< endl;
+            break;
+    }
+}
 
 
 // Function for the random words
@@ -59,48 +143,49 @@ std::string wordList() {
 // Function for the guessing right and wrong
 void guess() {
     string chosenWord = wordList();
-    //initialize placeholder witin new variable
+    // Initialize placeholder for guessed word
     std::string wordGuessed(chosenWord.length(), '_');
 
-    // incorrect guesses
+    // Initialize incorrect guesses and allowed guesses
     int incorrectGuesses = 0;
-    int guessesAllowed = 6; // const because this won't change
+    const int maxGuesses = 6; // Constant because it won't change
 
-    // Game loop word checking logic
-    while(incorrectGuesses != guessesAllowed){
+    // Game loop for word checking logic
+    while(incorrectGuesses < maxGuesses) {
 
+        // Display current guessed word and remaining attempts
+        cout << "Word: " << wordGuessed << endl;
+        cout << "Guesses Left: " << maxGuesses - incorrectGuesses << endl;
 
-        //Display for initialized placeholder and guesses
-        cout << "Word: " << wordGuessed << endl; // Initialized placeholder
-        cout << "Guesses Left: " << guessesAllowed << endl; // Guesses
-
-        //Prompt for user to guess
-        cout << "Guesses(input letter): ";
-        char guess;     // to save user letter guess
-        cin >> guess;   //Storing it
+        // Prompt the user to guess
+        cout << "Guess a letter: ";
+        char guess;
+        cin >> guess;
         cout << "\n";
 
-
-        // Validate and check guess
+        // Validate the user's guess
         bool correctGuess = false;
-        for (int i = 0; i <= chosenWord.length(); ++i){
+        for (int i = 0; i < chosenWord.length(); ++i) {
             if (chosenWord[i] == guess) {
                 wordGuessed[i] = guess;
-                correctGuess = true; // Mark as correct
+                correctGuess = true;
             }
         }
 
-        if (!correctGuess){
-            --guessesAllowed;
+        // If the guess is wrong, update the hangman display and guesses left
+        if (!correctGuess) {
+            incorrectGuesses++;
+            hangmanDisplay(incorrectGuesses);
         }
 
+        // If the word is fully guessed, the player wins
         if (wordGuessed == chosenWord) {
-            cout << "You have won!" << endl;
+            cout << "You won! The word was " << chosenWord << "." << endl;
             return;
         }
     }
 
-    // If exits loop they lost
-    cout << "You lost the answer was " << chosenWord << endl;
+    // If the loop exits, the player lost
+    cout << "You lost! The word was " << chosenWord << "." << endl;
 }
 
