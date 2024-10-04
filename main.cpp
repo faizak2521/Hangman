@@ -12,20 +12,14 @@
 #include <iomanip> // for std::setw
 using namespace std;
 
+// Definitions
 std::string wordList();
 void guess();
 void hangmanDisplay(int);
 
-int main() {
 
+int main() {
     cout << "Welcome to HANGMAN!" << endl << endl;
-//    cout <<"|---------| " << endl <<
-//           "|         |" << endl <<
-//           "| " << endl <<
-//           "| "<< endl <<
-//           "| "<< endl <<
-//           "| "<< endl <<
-//           "^^^^^^^^^^^^"<< endl;
 
     //call random words list
     hangmanDisplay(0);
@@ -34,10 +28,6 @@ int main() {
     return 0;
 }
 
-
-                                //++++++Game Setup+++++++
-            // Fix loop to end after winning **DONE**
-            //*****Make the animations come in play++++++++
 
 //Function for making hangman
 void hangmanDisplay(int incorrectGuesses) {
@@ -189,3 +179,4 @@ void guess() {
     cout << "You lost! The word was " << chosenWord << "." << endl;
 }
 
+//Done
