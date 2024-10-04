@@ -1,4 +1,4 @@
-```/*Hangman Project
+```cpp/*Hangman Project
 * 6 tries till full hangman is hanged
 * A-Z 26 choices
 * Random word generator
